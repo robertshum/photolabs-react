@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {isShowModal && <PhotoDetailsModal />}
+      {isShowModal && <PhotoDetailsModal showModal={showModal} />}
       <HomeRoute showModal={showModal} />
     </div>
   );
