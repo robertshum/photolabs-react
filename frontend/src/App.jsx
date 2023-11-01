@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeRoute from 'components/HomeRoute';
+import HomeRoute from './routes/HomeRoute';
 import './App.scss';
 
 // Note: Rendering a single component to build components in isolation
