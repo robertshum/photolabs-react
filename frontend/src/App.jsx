@@ -1,15 +1,12 @@
 import React from 'react';
-import PhotoList from './components/PhotoList';
+import HomeRoute from 'components/HomeRoute';
 import './App.scss';
-
-//temp remove when done
-import TopNavigationBar from 'components/TopNavigationBar';
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   return (
     <div className="App">
-      <TopNavigationBar />
+      <HomeRoute />
     </div>
   );
 };
