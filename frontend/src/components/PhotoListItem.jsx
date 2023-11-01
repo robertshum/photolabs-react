@@ -4,14 +4,23 @@ import "../styles/PhotoListItem.scss";
 
 
 const PhotoListItem = (props) => {
+
+  const handleClick = () => {
+    const showModal = props.showModal;
+    showModal(true);
+  };
+
   return (
     <div className='photo-list__item'>
       <PhotoFavButton
         photoId={props.photoId}
-        addFavourite={props.addFavourite}>
+        addFavourite={props.addFavourite}
+      />
 
-      </PhotoFavButton>
-      <img className='photo-list__image' src={props.imageSource}></img>
+      <div onClick={handleClick}>
+        <img className='photo-list__image' src={props.imageSource}></img>
+      </div>
+
       <div className='photo-list__user-details'>
         <img className='photo-list__user-profile' src={props.profile}></img>
         <div className='photo-list__user-details-name-location'>

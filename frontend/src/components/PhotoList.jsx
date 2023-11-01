@@ -18,6 +18,7 @@ const PhotoList = (props) => {
         name={item.user.name}
         profile={item.user.profile}
         addFavourite={props.addFavourite}
+        showModal={props.showModal}
       />
     );
   });

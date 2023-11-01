@@ -3,7 +3,7 @@ import PhotoList from '../components/PhotoList';
 import TopNavigationBar from '../components/TopNavigationBar';
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = () => {
+const HomeRoute = (props) => {
 
   const [listOfFavPhotos, setListOfFavPhotos] = useState([]);
 
@@ -30,7 +30,7 @@ const HomeRoute = () => {
       <TopNavigationBar
         isThereAFavourite={isThereAHeart}
       />
-      <PhotoList addFavourite={addFavourite}></PhotoList>
+      <PhotoList showModal={props.showModal} addFavourite={addFavourite}></PhotoList>
     </div>
   );
 };
