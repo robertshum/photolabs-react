@@ -1,6 +1,9 @@
 import React from 'react';
 
 import PhotoListItem from './components/PhotoListItem';
+
+//TEMP CSS
+import "./styles/PhotoList.scss";
 import './App.scss';
 
 const item = {
@@ -14,18 +17,22 @@ const item = {
   profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
 };
 
+const tempList = new Array(3).fill(
+  <PhotoListItem
+    key={item.id}
+    location={item.location}
+    imageSource={item.imageSource}
+    userName={item.username}
+    profile={item.profile}
+  />
+);
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   return (
-    <div className="App">
-      <PhotoListItem
-        
-        key={item.id}
-        location={item.location}
-        imageSource={item.imageSource}
-        userName={item.username}
-        profile={item.profile} />
+    //Move photolist to actual list component.
+    <div className="App photo-list">
+      {tempList}
     </div>
   );
 };
