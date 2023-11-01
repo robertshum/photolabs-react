@@ -22,12 +22,21 @@ const HomeRoute = () => {
       prevElements.filter(id => id != photoId));
   };
 
+  //on render, this will give us an updated 'heart' value
+  const isThereAHeart = isThereAFavourite(listOfFavPhotos);
+
   return (
     <div className='home-route'>
-      <TopNavigationBar></TopNavigationBar>
+      <TopNavigationBar
+        isThereAFavourite={isThereAHeart}
+      />
       <PhotoList addFavourite={addFavourite}></PhotoList>
     </div>
   );
+};
+
+const isThereAFavourite = (list) => {
+  return list.length !== 0;
 };
 
 export default HomeRoute;

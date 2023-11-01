@@ -10,15 +10,17 @@ function PhotoFavButton(props) {
 
   const handleClick = () => {
 
+    //async setting of new value of isHearted
     setIsHearted(!isHearted);
     if (isHearted) {
 
-      //remove the like
+      //remove the like, when isHearted is ABOUT
+      //to turn false.
       addToFav(props.photoId, false);
       return;
     }
 
-    //add the like
+    //add the like, when isHearted is ABOUT to turn true
     addToFav(props.photoId, true);
   };
 
