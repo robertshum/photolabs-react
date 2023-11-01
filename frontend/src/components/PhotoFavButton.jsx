@@ -15,7 +15,6 @@ function PhotoFavButton() {
       <div onClick={handleClick}>
         <div className="photo-list__fav-icon-svg">
           <FavIcon displayAlert={false} selected={isHearted} />
-          {/* Insert React */}
         </div>
       </div>
     </div>
