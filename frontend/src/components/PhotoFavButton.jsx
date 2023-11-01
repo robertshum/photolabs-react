@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton() {
+function PhotoFavButton(props) {
 
   const [isHearted, setIsHearted] = useState(false);
 
+  const addToFav = props.addFavourite;
+
   const handleClick = () => {
+
     setIsHearted(!isHearted);
+    if (isHearted) {
+
+      //remove the like
+      addToFav(props.photoId, false);
+      return;
+    }
+
+    //add the like
+    addToFav(props.photoId, true);
   };
 
   return (
