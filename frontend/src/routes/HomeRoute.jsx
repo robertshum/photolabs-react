@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PhotoList from '../components/PhotoList';
 import TopNavigationBar from '../components/TopNavigationBar';
+import photos from '../mocks/photos';
 import '../styles/HomeRoute.scss';
 
 const HomeRoute = (props) => {
@@ -8,18 +9,19 @@ const HomeRoute = (props) => {
   const [listOfFavPhotos, setListOfFavPhotos] = useState([]);
 
   //adds a element to our list (photo ids)
-  //helper method to pass down via props.
-  //goes to PhotoFavButton
-  //input photoId = id to add, boolean = true to add, false to remove
-  const addFavourite = (photoId, isAdd) => {
-    if (isAdd) {
-      setListOfFavPhotos((prevElements) => [...prevElements, photoId]);
+  //removes if it's on the list
+  const addFavourite = (photoId) => {
+
+    if (listOfFavPhotos.includes(photoId)) {
+
+      //remove
+      setListOfFavPhotos((prevElements) =>
+        prevElements.filter(id => id != photoId));
       return;
     }
 
-    //remove photo
-    setListOfFavPhotos((prevElements) =>
-      prevElements.filter(id => id != photoId));
+    //add
+    setListOfFavPhotos((prevElements) => [...prevElements, photoId]);
   };
 
   //on render, this will give us an updated 'heart' value
@@ -30,7 +32,11 @@ const HomeRoute = (props) => {
       <TopNavigationBar
         isThereAFavourite={isThereAHeart}
       />
-      <PhotoList showModal={props.showModal} addFavourite={addFavourite}></PhotoList>
+      <PhotoList
+        photos={photos}
+        showModal={props.showModal}
+        displayType="list"
+        addFavourite={addFavourite}></PhotoList>
     </div>
   );
 };

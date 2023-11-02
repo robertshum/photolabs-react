@@ -12,16 +12,9 @@ function PhotoFavButton(props) {
 
     //async setting of new value of isHearted
     setIsHearted(!isHearted);
-    if (isHearted) {
 
-      //remove the like, when isHearted is ABOUT
-      //to turn false.
-      addToFav(props.photoId, false);
-      return;
-    }
-
-    //add the like, when isHearted is ABOUT to turn true
-    addToFav(props.photoId, true);
+    //callback to parent to add
+    addToFav(props.photoId);
   };
 
   return (

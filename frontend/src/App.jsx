@@ -5,16 +5,20 @@ import './App.scss';
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
+  
+  const [photoInfo, setPhotoInfo] = useState(null);
 
-  const [isShowModal, setShowModal] = useState(false);
-
-  const showModal = (isShow) => {
-    setShowModal(isShow);
+  const showModal = (photoInfo) => {
+    photoInfo === null ? setPhotoInfo(null) : setPhotoInfo(photoInfo);
   };
 
   return (
     <div className="App">
-      {isShowModal && <PhotoDetailsModal showModal={showModal} />}
+      {photoInfo &&
+        <PhotoDetailsModal
+          showModal={showModal}
+          photoInfo={photoInfo}
+        />}
       <HomeRoute showModal={showModal} />
     </div>
   );
