@@ -5,6 +5,9 @@ import "../styles/PhotoList.scss";
 const PhotoList = (props) => {
 
   const listOfPhotos = props.photos.map(item => {
+
+    const selected = props.isFavourite(item.id);
+
     return (
       <PhotoListItem
         //from the item (mock or DB)
@@ -18,9 +21,10 @@ const PhotoList = (props) => {
         relatedPhotos={item.similar_photos}
 
         // from props
-        addFavourite={props.addFavourite}
         showModal={props.showModal}
         displayType={props.displayType}
+        toggleFavourite={() => props.toggleFavourite(item.id)}
+        selected={selected}
       />
     );
   });

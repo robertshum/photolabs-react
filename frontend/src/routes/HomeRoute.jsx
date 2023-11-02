@@ -15,7 +15,8 @@ const HomeRoute = (props) => {
         photos={photos}
         showModal={props.showModal}
         displayType="list"
-        addFavourite={props.addFavourite}>
+        toggleFavourite={props.toggleFavourite}
+        isFavourite={props.isFavourite}>
       </PhotoList>
     </div>
   );

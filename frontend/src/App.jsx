@@ -8,11 +8,15 @@ import './App.scss';
 const App = () => {
 
   const {
-    addFavourite,
-    isThereAHeart,
+    toggleFavourite,
+    isFavourite,
+    isThereAFavourite,
     photoInfo,
     showModal
   } = useApplicationData();
+
+  const isAPhotoFavourited = isThereAFavourite();
+  const selected = photoInfo && isFavourite(photoInfo.photoId);
 
   return (
     <div className="App">
@@ -20,12 +24,15 @@ const App = () => {
         <PhotoDetailsModal
           showModal={showModal}
           photoInfo={photoInfo}
-          addFavourite={addFavourite}
+          isFavourite={isFavourite}
+          selected={selected}
+          toggleFavourite={toggleFavourite}
         />}
       <HomeRoute
         showModal={showModal}
-        isThereAFavourite={isThereAHeart}
-        addFavourite={addFavourite}
+        isFavourite={isFavourite}
+        toggleFavourite={toggleFavourite}
+        isThereAFavourite={isAPhotoFavourited}
       />
     </div>
   );

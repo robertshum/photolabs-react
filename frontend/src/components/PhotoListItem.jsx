@@ -19,13 +19,6 @@ const PhotoListItem = (props) => {
     relatedPhotos: props.relatedPhotos
   };
 
-  const handleClick = () => {
-    const showModal = props.showModal;
-    if (showModal !== undefined) {
-      showModal(photoInfo);
-    }
-  };
-
   //display type.
   const displayList = props.displayType === "list";
   const displayRelated = props.displayType === "related";
@@ -48,11 +41,11 @@ const PhotoListItem = (props) => {
   return (
     <div className={itemClassName}>
       <PhotoFavButton
-        photoId={props.photoId}
-        addFavourite={props.addFavourite}
+        toggleFavourite={props.toggleFavourite}
+        selected={props.selected}
       />
 
-      <div onClick={handleClick}>
+      <div onClick={() => props.showModal(photoInfo)}>
 
         {/* Display the image as a basic list on front page */}
         {displayList && <img
