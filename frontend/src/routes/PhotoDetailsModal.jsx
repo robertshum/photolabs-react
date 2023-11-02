@@ -24,11 +24,13 @@ const PhotoDetailsModal = (props) => {
       </button>
       <PhotoListItem
         displayType="modal"
+        addFavourite={props.addFavourite}
         {...props.photoInfo} />
       <div className="photo-details-modal__header">Related Photos</div>
       <div className="photo-details-modal__images">
         <PhotoList
           displayType="related"
+          addFavourite={props.addFavourite}
           photos={relatedPhotos} />
       </div>
 
