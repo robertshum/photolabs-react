@@ -31,8 +31,4 @@ const App = () => {
   );
 };
 
-const isThereAFavourite = (list) => {
-  return list.length !== 0;
-};
-
 export default App;
