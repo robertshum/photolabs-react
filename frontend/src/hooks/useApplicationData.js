@@ -57,11 +57,13 @@ export const useApplicationData = () => {
     return listOfFavPhotos.includes(photoId);
   };
 
+  const selected = photoInfo && isFavourite(photoInfo.photoId);
+
   // return addFavourite fn to allow components to add photos
   // return isThereAHeart to tell if Nav should 'fill' the heart
   // return photoinfo, an {} that contains info about the photo that was clicked
   // return showModal fn that hides or closes the modal
-  return { toggleFavourite, isFavourite, isThereAFavourite, photoInfo, showModal };
+  return { toggleFavourite, isFavourite, isThereAFavourite, photoInfo, showModal, selected};
 };
 
 

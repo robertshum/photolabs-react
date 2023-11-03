@@ -12,11 +12,9 @@ const App = () => {
     isFavourite,
     isThereAFavourite,
     photoInfo,
-    showModal
+    showModal,
+    selected
   } = useApplicationData();
-
-  const isAPhotoFavourited = isThereAFavourite();
-  const selected = photoInfo && isFavourite(photoInfo.photoId);
 
   return (
     <div className="App">
@@ -32,7 +30,7 @@ const App = () => {
         showModal={showModal}
         isFavourite={isFavourite}
         toggleFavourite={toggleFavourite}
-        isThereAFavourite={isAPhotoFavourited}
+        isThereAFavourite={isThereAFavourite()}
       />
     </div>
   );
