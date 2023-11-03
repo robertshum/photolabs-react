@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 import '../styles/PhotoDetailsModal.scss';
