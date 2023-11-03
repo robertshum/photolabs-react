@@ -1,5 +1,8 @@
 const pg = require("pg");
 
+// PG database client/connection setup
+require('dotenv').config();
+
 const client = new pg.Client({
   host: process.env.PGHOST,
   name: process.env.PGDATABASE,
