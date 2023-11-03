@@ -18,7 +18,7 @@ const PhotoList = (props) => {
         imageSourceFull={item.urls.full}
         name={item.user.name}
         profile={item.user.profile}
-        relatedPhotos={item.similar_photos}
+        similar_photos={item.similar_photos}
 
         // from props
         showModal={props.showModal}

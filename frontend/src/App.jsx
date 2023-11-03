@@ -11,22 +11,24 @@ const App = () => {
     toggleFavourite,
     isFavourite,
     isThereAFavourite,
-    photoInfo,
     showModal,
-    selected
+    selected,
+    state
   } = useApplicationData();
 
   return (
     <div className="App">
-      {photoInfo &&
+      {state.photoInfo &&
         <PhotoDetailsModal
           showModal={showModal}
-          photoInfo={photoInfo}
+          photoInfo={state.photoInfo}
           isFavourite={isFavourite}
           selected={selected}
           toggleFavourite={toggleFavourite}
         />}
       <HomeRoute
+        photos={state.photoData}
+        topics={state.topicData}
         showModal={showModal}
         isFavourite={isFavourite}
         toggleFavourite={toggleFavourite}

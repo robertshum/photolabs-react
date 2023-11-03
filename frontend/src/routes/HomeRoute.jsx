@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PhotoList from '../components/PhotoList';
 import TopNavigationBar from '../components/TopNavigationBar';
-import photos from '../mocks/photos';
 import '../styles/HomeRoute.scss';
 
 const HomeRoute = (props) => {
@@ -9,10 +8,11 @@ const HomeRoute = (props) => {
   return (
     <div className='home-route'>
       <TopNavigationBar
+        topics={props.topics}
         isThereAFavourite={props.isThereAFavourite}
       />
       <PhotoList
-        photos={photos}
+        photos={props.photos}
         showModal={props.showModal}
         displayType="list"
         toggleFavourite={props.toggleFavourite}

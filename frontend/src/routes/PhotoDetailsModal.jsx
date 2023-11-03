@@ -7,7 +7,7 @@ import '../styles/PhotoDetailsModal.scss';
 const PhotoDetailsModal = (props) => {
 
   //convert relatedPhotos to array
-  const relatedPhotos = Object.values(props.photoInfo.relatedPhotos);
+  const relatedPhotos = Object.values(props.photoInfo.similar_photos);
 
   return (
     <div className="photo-details-modal">

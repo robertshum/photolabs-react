@@ -1,69 +1,139 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
+import axios from 'axios';
 
 const ADD_FAVOURITE = "addFavourite";
 const REMOVE_FAVOURITE = "removeFavourite";
 const SET_PHOTO_INFO = "setPhotoInfo";
+const SET_PHOTO_DATA = "setPhotoData";
+const SET_PHOTO_TOPICS = "setPhotoTopics";
 
 //It's just a state setter
 function reducer(state, action) {
 
   if (action.type === ADD_FAVOURITE) {
-    return [...state, action.value];
+    return {
+      ...state,
+      listOfFavPhotos: [...state.listOfFavPhotos, action.value]
+    };
   }
 
   if (action.type === REMOVE_FAVOURITE) {
-    return state.filter(id => id != action.value);
+    return {
+      ...state,
+      listOfFavPhotos: state.listOfFavPhotos.filter(id => id != action.value)
+    };
   }
 
-  if(action.type === SET_PHOTO_INFO) {
-    return action.value;
+  if (action.type === SET_PHOTO_INFO) {
+    return { ...state, photoInfo: action.value };
+  }
+
+  if (action.type === SET_PHOTO_DATA) {
+    return { ...state, photoData: action.value };
+  }
+
+  if (action.type === SET_PHOTO_TOPICS) {
+    return { ...state, topicData: action.value };
   }
 
   return state;
 }
 
+//TODO
+// 
+// photolist item returns back entire object with populated data.  could we do that here?  Might be easier to just get the object from photoData with the photo id and return it straight up.
+// 
+// TDO
 export const useApplicationData = () => {
 
-  const [photoInfo, setPhotoInfo] = useReducer(reducer, null);
-  const [listOfFavPhotos, setListOfFavPhotos] = useReducer(reducer, []);
+  const intialState = {
+    photoData: [],
+    topicData: [],
+    photoInfo: null,
+    listOfFavPhotos: []
+  };
+
+  const [state, dispatch] = useReducer(reducer, intialState);
+
+  //TODO maybe combine photos and topics into Promise.all!
+  useEffect(() => {
+    axios.get('/api/photos')
+      .then(function(response) {
+        // handle success
+        dispatch({ type: SET_PHOTO_DATA, value: response.data });
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function() {
+        // always executed
+      });
+  }, []);
+
+  //TODO maybe combine photos and topics into Promise.all!
+  useEffect(() => {
+    axios.get('/api/topics')
+      .then(function(response) {
+        // handle success
+        dispatch({ type: SET_PHOTO_TOPICS, value: response.data });
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function() {
+        // always executed
+      });
+  }, []);
+
 
   const showModal = (photoInfo) => {
     if (photoInfo === null) {
-      setPhotoInfo({ type: SET_PHOTO_INFO, value: null });
+      dispatch({ type: SET_PHOTO_INFO, value: null });
       return;
     }
 
-    setPhotoInfo({ type: SET_PHOTO_INFO, value: photoInfo });
+    //TODO see to do above.
+    dispatch({ type: SET_PHOTO_INFO, value: photoInfo });
   };
 
   const toggleFavourite = (photoId) => {
 
-    if (listOfFavPhotos.includes(photoId)) {
+    if (state.listOfFavPhotos.includes(photoId)) {
 
-      setListOfFavPhotos({ type: REMOVE_FAVOURITE, value: photoId });
+      dispatch({ type: REMOVE_FAVOURITE, value: photoId });
       return;
     }
 
     //add
-    setListOfFavPhotos({ type: ADD_FAVOURITE, value: photoId });
+    dispatch({ type: ADD_FAVOURITE, value: photoId });
   };
 
   //on render, this will give us an updated 'heart' value
-  const isThereAFavourite = (list = listOfFavPhotos) => {
+  const isThereAFavourite = (list = state.listOfFavPhotos) => {
     return list.length !== 0;
   };
 
   const isFavourite = (photoId) => {
-    return listOfFavPhotos.includes(photoId);
+    return state.listOfFavPhotos.includes(photoId);
   };
 
-  const selected = photoInfo && isFavourite(photoInfo.photoId);
+  const selected = state.photoInfo && isFavourite(state.photoInfo.photoId);
 
-  // return addFavourite fn to allow components to add photos
-  // return isThereAHeart to tell if Nav should 'fill' the heart
-  // return photoinfo, an {} that contains info about the photo that was clicked
-  // return showModal fn that hides or closes the modal
-  return { toggleFavourite, isFavourite, isThereAFavourite, photoInfo, showModal, selected};
+  // return toggleFavourite fn to allow components to add photos.
+  // return isThereAFavourite to tell if Nav should 'fill' the heart.
+  // return showModal fn that hides or closes the modal.
+  // return isFavourite to tell if the photo is favourited.
+  // return selected to if photo is favourited and modal is popped up.
+  return {
+    toggleFavourite,
+    isFavourite,
+    isThereAFavourite,
+    showModal,
+    selected,
+    state
+  };
 };
 
 

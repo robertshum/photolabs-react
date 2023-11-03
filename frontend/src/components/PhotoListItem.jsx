@@ -16,7 +16,7 @@ const PhotoListItem = (props) => {
       city: props.location.city,
       country: props.location.country
     },
-    relatedPhotos: props.relatedPhotos
+    similar_photos: props.similar_photos
   };
 
   //display type.
