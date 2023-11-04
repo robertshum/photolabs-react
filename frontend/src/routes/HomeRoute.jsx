@@ -10,6 +10,7 @@ const HomeRoute = (props) => {
       <TopNavigationBar
         topics={props.topics}
         isThereAFavourite={props.isThereAFavourite}
+        getPhotosById={props.getPhotosById}
       />
       <PhotoList
         photos={props.photos}

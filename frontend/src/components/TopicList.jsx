@@ -9,7 +9,8 @@ const TopicList = (props) => {
       <TopicListItem
         key={item.id}
         slug={item.slug}
-        title={item.title}>
+        title={item.title}
+        getPhotosById={() => props.getPhotosById(item.id)}>
       </TopicListItem>
     );
   });
@@ -20,5 +21,5 @@ const TopicList = (props) => {
     </div>
   );
 };
-
+ 
 export default TopicList;

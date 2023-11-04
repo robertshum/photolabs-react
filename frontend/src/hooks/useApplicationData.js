@@ -46,15 +46,11 @@ const intialState = {
   listOfFavPhotos: []
 };
 
-//TODO
-// 
-// photolist item returns back entire object with populated data.  could we do that here?  Might be easier to just get the object from photoData with the photo id and return it straight up.
-// 
-// TDO
 export const useApplicationData = () => {
 
   const [state, dispatch] = useReducer(reducer, intialState);
 
+  //get photos AND photo topics from server via axios.
   useEffect(() => {
     const photosFromApi = axios.get('/api/photos');
     const topicsFromApi = axios.get('/api/topics');
@@ -109,19 +105,28 @@ export const useApplicationData = () => {
     return state.listOfFavPhotos.includes(photoId);
   };
 
+  //Get photos based on topic ID
+  const getPhotosById = (topicId) => {
+    axios.get(`/api/topics/photos/${topicId}`)
+      .then(response => {
+        const photosByTopic = response.data;
+        dispatch({ type: SET_PHOTO_DATA, value: photosByTopic });
+      })
+      .catch(error => {
+        //handle error
+        console.log(error.message);
+      });
+  };
+
   //show favourited phot that is selected
   const selected = state.photoInfo && isFavourite(state.photoInfo.photoId);
 
-  // return toggleFavourite fn to allow components to add photos.
-  // return isThereAFavourite to tell if Nav should 'fill' the heart.
-  // return showModal fn that hides or closes the modal.
-  // return isFavourite to tell if the photo is favourited.
-  // return selected to if photo is favourited and modal is popped up.
   return {
     toggleFavourite,
     isFavourite,
     isThereAFavourite,
     showModal,
+    getPhotosById,
     selected,
     state
   };
