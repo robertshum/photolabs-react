@@ -31,11 +31,11 @@ Other branches are features / bugfixes / css touchups.
 
 # Final Product
 
-Main Landing Page:\
+Main Landing Page:
 
 !["Main Landing Page"](https://github.com/robertshum/photolabs-react/blob/main/docs/main_page_1.png)
 
-Modal View showing related photos:\
+Modal View showing related photos:
 
 !["Main Landing Page"](https://github.com/robertshum/photolabs-react/blob/main/docs/modal_1.png)
 
