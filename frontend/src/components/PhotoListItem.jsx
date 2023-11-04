@@ -5,6 +5,9 @@ import '../styles/PhotoDetailsModal.scss';
 
 const PhotoListItem = (props) => {
 
+  //we populate the photo here, because it could be potentially sent back to the user to render (in the modal).  
+
+  //Alternatively, we could send back a photo ID and construct the object in useAppData but that is expensive because we would have to do an array lookup.
   const photoInfo = {
     photoId: props.photoId,
     imageSourceFull: props.imageSourceFull,

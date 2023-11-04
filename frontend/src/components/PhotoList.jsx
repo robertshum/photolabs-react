@@ -10,7 +10,7 @@ const PhotoList = (props) => {
 
     return (
       <PhotoListItem
-        //from the item (mock or DB)
+        //from the DB
         key={item.id}
         photoId={item.id}
         location={item.location}

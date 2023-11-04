@@ -39,19 +39,19 @@ function reducer(state, action) {
   return state;
 }
 
+const intialState = {
+  photoData: [],
+  topicData: [],
+  photoInfo: null,
+  listOfFavPhotos: []
+};
+
 //TODO
 // 
 // photolist item returns back entire object with populated data.  could we do that here?  Might be easier to just get the object from photoData with the photo id and return it straight up.
 // 
 // TDO
 export const useApplicationData = () => {
-
-  const intialState = {
-    photoData: [],
-    topicData: [],
-    photoInfo: null,
-    listOfFavPhotos: []
-  };
 
   const [state, dispatch] = useReducer(reducer, intialState);
 
@@ -76,16 +76,17 @@ export const useApplicationData = () => {
     //called once.
   }, []);
 
+  //Show or Hide the modal
   const showModal = (photoInfo) => {
     if (photoInfo === null) {
       dispatch({ type: SET_PHOTO_INFO, value: null });
       return;
     }
 
-    //TODO see to do above.
     dispatch({ type: SET_PHOTO_INFO, value: photoInfo });
   };
 
+  //add or remove the photo from a list of favourites
   const toggleFavourite = (photoId) => {
 
     if (state.listOfFavPhotos.includes(photoId)) {
@@ -103,10 +104,12 @@ export const useApplicationData = () => {
     return list.length !== 0;
   };
 
+  //checks if photo is a favourite.
   const isFavourite = (photoId) => {
     return state.listOfFavPhotos.includes(photoId);
   };
 
+  //show favourited phot that is selected
   const selected = state.photoInfo && isFavourite(state.photoInfo.photoId);
 
   // return toggleFavourite fn to allow components to add photos.
