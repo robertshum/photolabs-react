@@ -55,38 +55,26 @@ export const useApplicationData = () => {
 
   const [state, dispatch] = useReducer(reducer, intialState);
 
-  //TODO maybe combine photos and topics into Promise.all!
   useEffect(() => {
-    axios.get('/api/photos')
-      .then(function(response) {
-        // handle success
-        dispatch({ type: SET_PHOTO_DATA, value: response.data });
-      })
-      .catch(function(error) {
-        // handle error
-        console.log(error);
-      })
-      .finally(function() {
-        // always executed
-      });
-  }, []);
+    const photosFromApi = axios.get('/api/photos');
+    const topicsFromApi = axios.get('/api/topics');
 
-  //TODO maybe combine photos and topics into Promise.all!
-  useEffect(() => {
-    axios.get('/api/topics')
-      .then(function(response) {
-        // handle success
-        dispatch({ type: SET_PHOTO_TOPICS, value: response.data });
-      })
-      .catch(function(error) {
-        // handle error
-        console.log(error);
-      })
-      .finally(function() {
-        // always executed
-      });
-  }, []);
+    //get all or nothing at all
+    Promise.all([photosFromApi, topicsFromApi])
+      .then(responses => {
+        const photoData = responses[0].data;
+        const topicsData = responses[1].data;
 
+        dispatch({ type: SET_PHOTO_DATA, value: photoData });
+        dispatch({ type: SET_PHOTO_TOPICS, value: topicsData });
+      })
+      .catch(error => {
+        //handle error
+        console.log(error.message);
+      });
+
+    //called once.
+  }, []);
 
   const showModal = (photoInfo) => {
     if (photoInfo === null) {
@@ -135,6 +123,3 @@ export const useApplicationData = () => {
     state
   };
 };
-
-
-
