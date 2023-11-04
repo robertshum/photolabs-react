@@ -14,6 +14,12 @@ The loading of data is done on the back-end via. server API calls to Postgres, a
 * Users can like/heart a photo.  Liked photos are persisted in the same instance across different perspectives.  (ex: photos that are 'liked', will also show up 'liked' in the modal or related photos).
 * Users can view larger sizes of the photos and view related photos in the modal.
 
+## Finished Strech Goals
+
+* Clicking on related photos in the modal was never in the specs.  However it now load the correct picture into the modal, which then, loads a new series of related photos.
+  * Added gradual scrolling to the top of the modal to let users know that there is a new focused picture in the modal.
+  * Required to lookup photo array to repopulate related_photos.
+
 ## Challenges
 
 * This project has gone through major refactorings, which was very time consuming.  Some major ones include:

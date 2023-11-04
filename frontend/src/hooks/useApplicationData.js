@@ -79,6 +79,19 @@ export const useApplicationData = () => {
       return;
     }
 
+    //we need to repopulate similar photos, if it's undefined
+    let foundPhoto = null;
+    if (photoInfo.similar_photos === undefined) {
+
+      const id = photoInfo.photoId;
+      foundPhoto = state.photoData.find(photo => photo.id === id);
+    }
+
+    //if we found it, update the photoInfo
+    if (foundPhoto) {
+      photoInfo.similar_photos = foundPhoto.similar_photos;
+    }
+
     dispatch({ type: SET_PHOTO_INFO, value: photoInfo });
   };
 
