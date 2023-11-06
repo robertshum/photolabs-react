@@ -66,7 +66,7 @@ export const useApplicationData = () => {
       })
       .catch(error => {
         //handle error
-        console.log(error.message);
+        // console.log(error.message);
       });
 
     //called once.
@@ -127,7 +127,7 @@ export const useApplicationData = () => {
       })
       .catch(error => {
         //handle error
-        console.log(error.message);
+        // console.log(error.message);
       });
   };
 
