@@ -4,6 +4,10 @@ import "../styles/PhotoList.scss";
 
 const PhotoList = (props) => {
 
+  //display type.
+  const displayRelated = props.displayType === "related";
+
+  //map over the photos and create an item
   const listOfPhotos = props.photos.map(item => {
 
     const selected = props.isFavourite(item.id);
@@ -30,7 +34,7 @@ const PhotoList = (props) => {
   });
 
   return (
-    <ul className="photo-list">
+    <ul className={displayRelated ? "similar-photos" : "photo-list"}>
       {listOfPhotos}
     </ul>
   );

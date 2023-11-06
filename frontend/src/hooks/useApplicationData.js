@@ -64,10 +64,6 @@ export const useApplicationData = () => {
         dispatch({ type: SET_PHOTO_DATA, value: photoData });
         dispatch({ type: SET_PHOTO_TOPICS, value: topicsData });
       })
-      .catch(error => {
-        //handle error
-        // console.log(error.message);
-      });
 
     //called once.
   }, []);
@@ -125,10 +121,6 @@ export const useApplicationData = () => {
         const photosByTopic = response.data;
         dispatch({ type: SET_PHOTO_DATA, value: photosByTopic });
       })
-      .catch(error => {
-        //handle error
-        // console.log(error.message);
-      });
   };
 
   //show favourited phot that is selected

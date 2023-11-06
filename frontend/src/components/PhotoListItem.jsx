@@ -29,10 +29,16 @@ const PhotoListItem = (props) => {
 
   let itemClassName = '';
 
-  //if it's shown as a 'related' or a 'list'
+  //if it's shown as a list'
   //display as normal, with the border
-  if (displayRelated || displayList) {
+  if (displayList) {
     itemClassName = 'photo-list__item';
+  }
+
+  //if it's shown as a 'related'
+  //display as normal, with the border, with specialized margins
+  if (displayRelated) {
+    itemClassName = 'photo-details-modal_related-image';
   }
 
   //if it's the main image (modal)

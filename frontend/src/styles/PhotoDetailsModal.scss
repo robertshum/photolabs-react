@@ -12,6 +12,7 @@
   z-index: 10;
 }
 
+
 .photo-details-modal_item {
   margin: 24px;
   padding: 8px;
@@ -40,6 +41,16 @@
 .photo-details-modal__image {
   max-width: 100%;
   border-radius: 8px;
+}
+
+.photo-details-modal_related-image {
+  margin: 5px;
+  padding: 8px;
+  border-width: 0.5px;
+  border-color: lightgray;
+  border-style: solid;
+  border-radius: 8px;
+  max-width: fit-content;
 }
 
 .photo-details-modal__top-bar {
