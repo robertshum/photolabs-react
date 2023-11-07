@@ -22,6 +22,7 @@ const App = () => {
     isFavourite,
     isThereAFavourite,
     showModal,
+    toggleFavModal,
     getPhotosById,
     selected,
     state
@@ -37,12 +38,14 @@ const App = () => {
           isFavourite={isFavourite}
           selected={selected}
           toggleFavourite={toggleFavourite}
+          showFavModal={state.showFavModal}
         />}
       <HomeRoute
         photos={state.photoData}
         topics={state.topicData}
         getPhotosById={getPhotosById}
         showModal={showModal}
+        toggleFavModal={() => toggleFavModal()}
         isFavourite={isFavourite}
         toggleFavourite={toggleFavourite}
         isThereAFavourite={isThereAFavourite()}

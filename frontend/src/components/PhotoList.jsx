@@ -8,14 +8,14 @@ const PhotoList = (props) => {
   const displayRelated = props.displayType === "related";
 
   //map over the photos and create an item
-  const listOfPhotos = props.photos.map(item => {
+  const listOfPhotos = props.photos.map((item, index) => {
 
     const selected = props.isFavourite(item.id);
 
     return (
       <PhotoListItem
         //from the DB
-        key={item.id}
+        key={index}
         photoId={item.id}
         location={item.location}
         imageSourceRegular={item.urls.regular}

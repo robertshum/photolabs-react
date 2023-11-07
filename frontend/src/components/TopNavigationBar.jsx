@@ -11,6 +11,7 @@ const TopNavigation = (props) => {
       <TopicList topics={props.topics} getPhotosById={props.getPhotosById}></TopicList>
       {/* Shows a badge in Nav if there is ANY favourited item */}
       <FavBadge
+        toggleFavModal={props.toggleFavModal}
         isThereAFavourite={props.isThereAFavourite}
       />
     </div>

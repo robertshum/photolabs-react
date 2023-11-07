@@ -6,9 +6,14 @@ const REMOVE_FAVOURITE = "removeFavourite";
 const SET_PHOTO_INFO = "setPhotoInfo";
 const SET_PHOTO_DATA = "setPhotoData";
 const SET_PHOTO_TOPICS = "setPhotoTopics";
+const TOGGLE_SHOW_FAV_MODAL = "toggleFavModal";
 
 //It's just a state setter
 function reducer(state, action) {
+
+  if (action.type === TOGGLE_SHOW_FAV_MODAL) {
+    return { ...state, showFavModal: action.value };
+  }
 
   if (action.type === ADD_FAVOURITE) {
     return {
@@ -43,7 +48,8 @@ const intialState = {
   photoData: [],
   topicData: [],
   photoInfo: null,
-  listOfFavPhotos: []
+  listOfFavPhotos: [],
+  showFavModal: false
 };
 
 export const useApplicationData = () => {
@@ -63,7 +69,7 @@ export const useApplicationData = () => {
 
         dispatch({ type: SET_PHOTO_DATA, value: photoData });
         dispatch({ type: SET_PHOTO_TOPICS, value: topicsData });
-      })
+      });
 
     //called once.
   }, []);
@@ -72,6 +78,7 @@ export const useApplicationData = () => {
   const showModal = (photoInfo) => {
     if (photoInfo === null) {
       dispatch({ type: SET_PHOTO_INFO, value: null });
+      dispatch({ type: TOGGLE_SHOW_FAV_MODAL, value: false });
       return;
     }
 
@@ -87,7 +94,6 @@ export const useApplicationData = () => {
     if (foundPhoto) {
       photoInfo.similar_photos = foundPhoto.similar_photos;
     }
-
     dispatch({ type: SET_PHOTO_INFO, value: photoInfo });
   };
 
@@ -120,7 +126,37 @@ export const useApplicationData = () => {
       .then(response => {
         const photosByTopic = response.data;
         dispatch({ type: SET_PHOTO_DATA, value: photosByTopic });
-      })
+      });
+  };
+
+  //O(m x n), m = # of favs, n = number of total photos
+  //could be made more efficient if we persist liked photos into DB and then queried from it.
+  const toggleFavModal = () => {
+    console.log("hitting the toggle");
+
+    const favPhotoObjArray = [];
+    state.listOfFavPhotos.forEach(id => {
+      const favPhoto = state.photoData.find(photo => photo.id === id);
+      favPhotoObjArray.push(favPhoto);
+    });
+    console.log(favPhotoObjArray);
+    if (favPhotoObjArray.length === 0) {
+      return;
+    }
+    const [firstFavPhoto, ...remFavPhotos] = favPhotoObjArray;
+
+    //totally hijacking set photo info
+    const returnedPhoto = {};
+    returnedPhoto.photoId = firstFavPhoto.id;
+    returnedPhoto.imageSourceFull = firstFavPhoto.urls.full;
+    returnedPhoto.imageSourceRegular = firstFavPhoto.urls.regular;
+    returnedPhoto.profile = firstFavPhoto.user.profile;
+    returnedPhoto.name = firstFavPhoto.user.name;
+    returnedPhoto.location = firstFavPhoto.location;
+    returnedPhoto.similar_photos = remFavPhotos;
+
+    dispatch({ type: SET_PHOTO_INFO, value: returnedPhoto });
+    dispatch({ type: TOGGLE_SHOW_FAV_MODAL, value: true });
   };
 
   //show favourited phot that is selected
@@ -131,6 +167,7 @@ export const useApplicationData = () => {
     isFavourite,
     isThereAFavourite,
     showModal,
+    toggleFavModal,
     getPhotosById,
     selected,
     state
