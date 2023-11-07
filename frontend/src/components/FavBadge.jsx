@@ -5,7 +5,7 @@ import '../styles/FavBadge.scss';
 
 const FavBadge = (props) => {
   return (
-    <div className='fav-badge'>
+    <div className='fav-badge' onClick={props.toggleFavModal}>
       <FavIcon
         selected={props.isThereAFavourite}
         displayAlert={props.isThereAFavourite}

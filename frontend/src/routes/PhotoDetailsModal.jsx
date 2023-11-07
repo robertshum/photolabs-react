@@ -73,7 +73,9 @@ const PhotoDetailsModal = (props) => {
         {...props.photoInfo}
       />
 
-      <div className="photo-details-modal__header">Related Photos</div>
+      <div className="photo-details-modal__header">
+        {props.showFavModal ? "Other Favourites" : "Show Related Photos"}
+      </div>
 
       <div className="photo-details-modal__images">
         <PhotoList

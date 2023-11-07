@@ -11,6 +11,7 @@ const HomeRoute = (props) => {
         topics={props.topics}
         isThereAFavourite={props.isThereAFavourite}
         getPhotosById={props.getPhotosById}
+        toggleFavModal={props.toggleFavModal}
       />
       <PhotoList
         photos={props.photos}
